@@ -3,9 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+        * {
+            font-family: "Microsoft Sans Serif";
+            font-size: 16px;
+        }
+    </style>
+
 </head>
 <body>
+<pre>
+    模块模式
+
+    1. 理解如何模块模式？
+
+       模块模式，使一个独立的对象拥有公有／私有方法和变量
+
+    2. 模块模式的目的是什么？
+
+      降低函数名的冲突
+
+    3. 闭包的使用
+
+       利用函数形成独立的作用域，这个作用域中定义私有／共有方法，这些方法使用这个作用域中的变量也就形成了闭包。
+
+       －－这里体现了闭包的使用。
+
+    4. 实际中在哪里使用？
+
+</pre>
+
+
 <script>
+
+  /*创建一个自包含的模块来实现模块模式*/
+
+  /*  let testModule = (function () {
+      let counter = 0;
+
+      return {
+        incrementCounter: function () {
+          return counter++;
+        },
+        resetCounter: function () {
+          console.log('输出计算的值：', counter);
+          counter = 0;
+          console.log('输出计算的值：', counter);
+
+        }
+
+      }
+
+    })();*/
+
+  // 利用函数的作用域，返回一个对象，拥有已定义方法的对象
+
+  let testModule = function () {
+    let counter = 0;
+
+    return {
+      incrementCounter: function () {
+        return counter++;
+      },
+      resetCounter: function () {
+        console.log('输出计算的值：', counter);
+        counter = 0;
+        console.log('输出计算的值：', counter);
+
+      }
+
+    }
+
+  };
+
+
+  /*  testModule.incrementCounter();
+  testModule.incrementCounter();
+  testModule.incrementCounter();
+  testModule.resetCounter();
+
+  testModule.incrementCounter();
+  testModule.resetCounter();*/
+
+
+  let testModule1 = testModule();
+
+  testModule1.incrementCounter();
+  testModule1.incrementCounter();
+  testModule1.incrementCounter();
+  testModule1.resetCounter();
+
+  testModule1.incrementCounter();
+  testModule1.resetCounter();
+
+
+  let testModule2 = testModule();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.resetCounter();
+
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.incrementCounter();
+  testModule2.resetCounter();
+
+  console.log('-----------------------------------')
+
+
+  /*创建一个包含命名空间、共有和私有变量的module模式*/
+
+  let myNamespace = (function () {
+    // 私有计数器
+    let myPrivateVar = 0;
+
+    let myPrivateMethod = function (foo) {
+      console.log('输出参数－－', foo)
+      console.log('计算单位－－', myPrivateVar)
+    }
+
+    return {
+      myPublicVarVar: 'foo',
+      myPublicFunction: function (bar) {
+        myPrivateVar++;
+
+        myPrivateMethod(bar);
+
+      }
+    }
+
+
+  })();
+
+
+  myNamespace.myPublicFunction('这是私有方法－－');
+  myNamespace.myPublicFunction('这是私有方法－－');
+
 
 </script>
 </body>
