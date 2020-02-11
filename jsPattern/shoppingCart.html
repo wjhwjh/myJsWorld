@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            font-family: "Microsoft YaHei";
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            border: none;
+            list-style: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .content {
+            width: 1000px;
+            margin: auto;
+            border: 1px solid #ccc;
+        }
+
+        .shopList {
+
+        }
+
+        .shopList li {
+            height: 60px;
+            line-height: 60px;
+            border-bottom: 1px solid #cccccc;
+
+
+        }
+
+        .shopList li:after,
+        .shopList li:before {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .shopList li span {
+            width: 25%;
+            float: left;
+            display: block;
+            text-align: center;
+
+        }
+
+        .total {
+            height: 60px;
+            line-height: 60px;
+            padding: 0 20px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .total span {
+            font-size: 26px;
+            color: #f00;
+        }
+
+        .num {
+        }
+
+        .num input {
+            background: #ccc;
+            font-size: 14px;
+            text-align: center;
+            width: 40px;
+            margin: 0 10px;
+
+        }
+
+        .num button {
+            border: 1px solid #ccc;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="content">
+
+    <ul class="shopList">
+        <li>
+            <span>名称</span>
+            <span>单价(元)</span>
+            <span>数量</span>
+            <span>总计(元)</span>
+        </li>
+
+        <li>
+            <span>口罩</span>
+            <span class="price">10</span>
+            <span class="num"><button class="reduceHandel">-</button><input type="text" value="0" disabled><button
+                    class="addHandel">+</button></span>
+            <span class="totalPrice">0</span>
+        </li>
+        <li>
+            <span>口罩N95</span>
+            <span class="price">10</span>
+            <span class="num"><button class="reduceHandel">-</button><input type="text" value="0" disabled><button
+                    class="addHandel">+</button></span>
+            <span class="totalPrice">0</span>
+        </li>
+        <li>
+            <span>平板</span>
+            <span class="price">1000</span>
+            <span class="num"><button class="reduceHandel">-</button><input type="text" value="0" disabled><button
+                    class="addHandel">+</button></span>
+            <span class="totalPrice">0</span>
+        </li>
+        <li>
+            <span>笔记本</span>
+            <span class="price">12000</span>
+            <span class="num"><button class="reduceHandel">-</button><input type="text" value="0" disabled><button
+                    class="addHandel">+</button></span>
+            <span class="totalPrice">0</span>
+        </li>
+        <li>
+            <span>口口脆</span>
+            <span class="price">5</span>
+            <span class="num"><button class="reduceHandel">-</button><input type="text" value="0" disabled><button
+                    class="addHandel">+</button></span>
+            <span class="totalPrice">0</span>
+        </li>
+
+    </ul>
+    <div class="total">商品总数：<span class="totalAll">0</span>件 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 结算总金额:<span
+            class="totalAllPrice">0</span>元
+    </div>
+</div>
+
+
+<script>
+
+  let priceEl = document.querySelectorAll('.price'), // 商品的单价
+    numEl = document.querySelectorAll('.num'),  // 商品数量元素
+    numIpt = document.querySelectorAll('.num input'), // 数量个数
+    numRecuce = document.querySelectorAll('.num .reduceHandel'), // 减量
+    numAdd = document.querySelectorAll('.num .addHandel'), // 增量
+    totalPriceEl = document.querySelectorAll('.totalPrice'), // 每件商品的购买总价
+    totalAllEl = document.querySelector('.totalAll'), // 购买的总件数
+    totalAllPriceEl = document.querySelector('.totalAllPrice'); // 购买的总钱数
+
+
+ // console.log(totalAllEl.innerHTML, totalAllPriceEl.innerHTML);
+
+  let len = priceEl.length;
+
+
+  //增加商品
+  for (let i = 0; i < len; i++) {
+
+    let currentNum = numIpt[i].value;
+
+    numAdd[i].onclick = function () {
+      // 限制数量
+      currentNum > 9 ? currentNum = 9 : currentNum;
+      numIpt[i].value = ++currentNum;
+
+      // 每件商品的总价
+      totalPriceEl[i].innerHTML = currentNum * priceEl[i].innerHTML;
+
+      // 总量函数
+      totalFn();
+    }
+
+
+    numRecuce[i].onclick = function () {
+      // 限制数量，只要显示值是0，则不在减，当前显示为0。 这是小于1，是因为-- 在前，先减后使用
+      currentNum < 1 ? currentNum = 1 : currentNum;
+      numIpt[i].value = --currentNum;
+
+      // 每件商品的总价
+      totalPriceEl[i].innerHTML = currentNum * priceEl[i].innerHTML;
+    }
+
+  }
+
+  // 总量的计算
+  function totalFn() {
+    let priceAll = 0;
+    let numAll = 0;
+    for (let i = 0; i < len; i++) {
+      priceAll += totalPriceEl[i].innerHTML * 1;
+      numAll += numIpt[i].value * 1;
+    }
+
+    totalAllEl.innerHTML = numAll;
+    totalAllPriceEl.innerHTML = priceAll;
+
+    //console.log(priceAll,numAll)
+  }
+
+
+  // 总价的计算
+
+
+</script>
+
+
+</body>
+</html>

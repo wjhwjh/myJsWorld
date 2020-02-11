@@ -38,6 +38,7 @@
 <script>
 
   /*创建一个自包含的模块来实现模块模式*/
+  // 自执行，
 
   /*  let testModule = (function () {
       let counter = 0;
@@ -58,6 +59,7 @@
     })();*/
 
   // 利用函数的作用域，返回一个对象，拥有已定义方法的对象
+  // 执行时每次返回一个对象
 
   let testModule = function () {
     let counter = 0;
@@ -69,7 +71,7 @@
       resetCounter: function () {
         console.log('输出计算的值：', counter);
         counter = 0;
-        console.log('输出计算的值：', counter);
+        console.log('输出重置后的值：', counter);
 
       }
 
@@ -92,17 +94,17 @@
   testModule1.incrementCounter();
   testModule1.incrementCounter();
   testModule1.incrementCounter();
-  testModule1.resetCounter();
+  //testModule1.resetCounter();
 
   testModule1.incrementCounter();
-  testModule1.resetCounter();
+  //testModule1.resetCounter();
 
 
   let testModule2 = testModule();
   testModule2.incrementCounter();
   testModule2.incrementCounter();
   testModule2.incrementCounter();
-  testModule2.resetCounter();
+  //testModule2.resetCounter();
 
   testModule2.incrementCounter();
   testModule2.incrementCounter();
@@ -142,6 +144,63 @@
 
   myNamespace.myPublicFunction('这是私有方法－－');
   myNamespace.myPublicFunction('这是私有方法－－');
+
+  console.log('购物车的实现-----------------------------------')
+
+  let shoppingCart = (function () {
+
+    // 私有
+    let basket = [];
+    
+    function doSomethingPrivate() {
+      
+    }
+
+    function doSomethingElsePrivate() {
+
+    }
+
+    //返回一个暴露出的公有对象
+
+    return {
+      // 添加item到购物车
+      addItem: function (values) {
+         basket.push(values);
+
+      },
+      //获取购物车里所有item的数
+      getItemCount: function () {
+        return basket.length
+      },
+      // 私有函数的公有形式别名
+      doSomething: doSomethingPrivate(),
+      getTotal:function () {
+        let itemCount = this.getItemCount();
+
+        let total = 0;
+
+        while (itemCount--){
+            total += basket[itemCount].price;
+        }
+
+        return total;
+      }
+
+    }
+
+  })();
+
+  shoppingCart.addItem({
+   item:'bread',
+   price: 0.5
+  })
+  shoppingCart.addItem({
+    item:'bread',
+    price: 1
+  })
+
+  console.log('个数-----', shoppingCart.getItemCount())
+  console.log('总价-----', shoppingCart.getTotal())
 
 
 </script>

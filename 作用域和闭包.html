@@ -2,10 +2,125 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>闭包</title>
+    <style>
+        *{
+          font-size: 16px;
+        }
+
+    </style>
+
 </head>
 <body>
+
+<pre>
+    闭包
+
+    1. 什么样的形式定义为闭包？ 闭包概念的理解
+
+    2. 闭包里变量使用之后不会释放，
+
+       在什么情况下，闭包不会释放变量？在那种情况下，闭包可以释放变量
+
+    3. 正常函数
+
+
+
+
+    目的：
+
+    如果是对象，搞清楚对象的最后的返回值是什么？ 其中属性和方法是什么？能干什么？
+
+    如果是函数，则要明白函数的执行结果是什么？ 函数中的变量以及执行上下文是什么？
+
+    如何使用？ 返回的结果是什么？
+
+
+    －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+    参考文章
+
+    https://segmentfault.com/a/1190000006875662
+
+</pre>
+
+
+
+
 <script>
+/*
+
+这里如何思考这个问题， 以后遇到的问题如何思考？
+
+* */
+
+console.log('闭包的形式－－－－－－－－－－－－－－')
+
+
+
+console.log('常见到闭包案例－－－－－－－－－－－－－－')
+function test(){
+  let arr = [];
+
+  for(var i=0; i<10; i++){
+    arr[i] = function () {
+      return i
+    }
+  }
+
+
+  for(var j=0; j<10; j++){
+    console.log('test---',arr[j]());
+  }
+}
+
+test();
+
+
+
+
+
+console.log('闭包面试题－－－－－－－－－－－－－－－－')
+
+function fun(n,o) {
+   console.log('输出o的值－－－',o);
+   // 返回一个对象
+   return {
+      fun: function (m) {
+        return fun(m,n)
+      }
+   }
+}
+
+let a = fun(0); // undefined
+console.log('a的返回值－－－',a);
+a.fun(1); // 0   本质：相当于访问a对象中的属性方法fun
+a.fun(2); // 0
+a.fun(3); // 0
+
+let b = fun(0).fun(1).fun(2).fun(3);  // 本质：相当于嵌套回调
+
+console.log('b的输出值－－－',b); // undefined 0 1 2
+
+
+console.log('------------------------------')
+let c = fun(0).fun(1);
+c.fun(2)
+c.fun(3)
+console.log('c的输出值－－－',c);
+
+
+console.log('访问对象的方法－－－－－－－－－－－－－－－－')
+
+let obj = {
+  getName: function (name) {
+    console.log('输出name－－－',name);
+  }
+}
+
+console.log(obj.getName('huizi'))
+console.log(obj.getName('huizi1'))
+console.log(obj.getName('huizi2'))
 
 
 

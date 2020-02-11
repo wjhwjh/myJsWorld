@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+<pre>
+  单例模式
+
+  概念：保证一个类仅有一个实例对象，并提供一个访问它的全局访问点。（类、实例对象，访问点）
+
+  实现的方法为先判断实例存在与否。
+
+  若存在则直接返回，若不存在就创建并返回。确保一个类只有一个对象。
+
+
+  －－－－－－－－－－－
+
+  主要是对实例对象的使用，这个对象中的方法和属性的操作。
+
+  如何证明？如何命名实现？
+
+
+</pre>
+
+<script>
+
+//类
+class CreateUser{
+    constructor(name){
+        this.name = name;
+        this.getName();
+    }
+
+    getName(){
+      console.log('name-',this.name)
+    }
+
+}
+
+// 代理实现单例模式
+// 闭包，通过返回函数，返回一个实例对象
+let proxyMode =function () {
+  // 利用闭包概念，创建一个变量存放类的对象
+  let instance = null;
+
+  //console.log(instance);
+  return function (name) {
+    //console.log(1111,instance);
+    if(!instance){
+      instance = new CreateUser(name)
+    }
+    return instance;
+  }
+};
+let p = proxyMode();
+console.log(p); // 返回一个函数
+let obj1 =p('aa');
+let obj2 =p('bb');
+console.log(obj1)
+console.log(obj2)
+console.log(obj1===obj2)
+
+console.log('立即执行函数－－－－－－－－－－－－－－－－－－－－')
+
+// 立即执行
+let proxyMode1 =(function () {
+  // 利用闭包概念，创建一个变量存放类的对象
+  let instance = null;
+  return function (name) {
+    //console.log(1111,instance);
+    if(!instance){
+      instance = new CreateUser(name)
+    }
+    return instance;
+  }
+})();
+
+let obj3 =proxyMode1('cc');
+let obj4 =proxyMode1('dd');
+console.log(obj3)
+console.log(obj4)
+console.log(obj3===obj4)
+
+
+
+
+
+</script>
+</body>
+</html>
