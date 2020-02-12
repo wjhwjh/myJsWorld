@@ -59,6 +59,11 @@ console.log('闭包的形式－－－－－－－－－－－－－－')
 
 
 console.log('常见到闭包案例－－－－－－－－－－－－－－')
+
+// 作用域的问题， 从作用域的角度理解
+// es6中大括号中({})也形成作用域
+// es5
+
 function test(){
   let arr = [];
 
@@ -68,15 +73,27 @@ function test(){
     }
   }
 
-
   for(var j=0; j<10; j++){
     console.log('test---',arr[j]());
   }
 }
-
 test();
 
+function test1(){
+  let arr = [];
 
+  for(let i=0; i<10; i++){
+    arr[i] = function () {
+      return i
+    }
+  }
+
+  for(let j=0; j<10; j++){
+    console.log('test---',arr[j]());
+  }
+}
+
+test1();
 
 
 

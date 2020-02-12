@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+<pre>
+  单例模式2
+
+
+  弹框就是一个单例模型的体现
+
+  这个弹框只要显示，就不会再创建一个新弹框。显示只能隐藏。
+
+  如果是隐藏则只能显示。
+
+
+
+
+</pre>
+
+
+<button id="btn">点击</button>
+<button id="btn1">点击</button>
+
+<script>
+
+  //构造器， 实例化对象
+  class LoginForm {
+    constructor() {
+      this.state = 'hide'
+    }
+    show() {
+       console.log(this.state);
+
+      if (this.state === 'show') {
+        console.log('已经显示');
+        return
+      }
+      this.state = 'show';
+      console.log('登录框显示成功－－')
+
+    }
+    hide() {
+      console.log(this.state);
+
+      if (this.state === 'hide') {
+        alert('已经隐藏');
+        return
+      }
+      this.state = 'hide';
+      console.log('登录框隐藏成功－－')
+    }
+  }
+
+
+ // 利用代理实现单例模式， 单例模式一个类只实例化一个对象，这个对象的作用是什么？？？实现一个什么的功能
+ // 单例实例化的对象功能是什么？？和DOM结合操作？？ 操作DOM？
+ // 代理中形成闭包
+
+  LoginForm.getInstance = (function () {
+
+    let instance = null;
+
+    return function () {
+      if (!instance) {
+        instance = new LoginForm();
+      }
+      return instance
+    }
+
+  })();
+
+
+ let obj1 = LoginForm.getInstance();
+ //obj1.show();
+
+ let obj2 = LoginForm.getInstance();
+
+ //obj2.hide();
+
+let btn = document.querySelector('#btn');
+let btn1 = document.querySelector('#btn1');
+
+  btn.onclick = function () {
+    obj1.show();
+  }
+
+
+  btn1.onclick = function () {
+    obj1.hide();
+  }
+
+</script>
+
+</body>
+</html>
