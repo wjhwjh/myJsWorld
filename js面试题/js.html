@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>js部分面试题</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        pre {
+            font-size: 16px;
+        }
+
+        .content {
+            width: 1000px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+<body>
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>手写 bind、call 和 apply</h2>
+<div class="content">
+    <pre>
+        我所知道的
+
+        1. 函数的方法
+
+        2. 改变函数中this的指向
+
+        3. 案例
+
+        4. bind\call\apply的区别
+
+           1) 传参的形式不同， call是用逗号隔开， bind和apply是数组的形式
+
+           2）执行的不同，bind返回一个函数，调用执行，例如f.bind()()； call和apply是自执行。
+
+
+        目标
+
+        1. 手写这几个函数的功能， 并搞懂其中的原理
+
+
+
+    </pre>
+
+
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现一个继承</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现一个 new</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现一个 instanceof</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>手写 jsonp 的实现</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>ajax 的实现</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>reduce 的实现</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现 generator 的自动执行器</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>节流</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>防抖</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>手写 Promise</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现一个路由 - Hash</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>路由实现 - history</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+<script>
+  /*手写 bind、call 和 apply*/
+  Function.prototype.bind = function (context, ...bindArgs) {
+    console.log('bindArgs-', bindArgs)
+
+    //console.log('当前this调用bind的原函数',this);
+
+    // 先判断调用bind的是否是函数，如果不是则抛出错误
+    // this 指向调用bind的原函数
+    const func = this;
+    context = context || window; // 没有设置context上下文，则指向window
+
+    console.log(typeof func);
+
+    if (typeof func !== 'function') {
+      throw new TypeError('请使用函数调用bind')
+    }
+
+    // bind 返回一个绑定 this 的函数
+    return function (...callArgs) {
+      console.log('callArgs-', callArgs);
+      let args = bindArgs.concat(callArgs);
+
+      console.log('所有参数', args)
+
+      console.log('执行函数this的指向－－', this)
+
+      console.log('func----', func)
+      console.log('func----', this instanceof func)
+
+      //
+      return func.call(context, ...args)
+    }
+  }
+
+
+
+  function f(a) {
+    console.log('-------------------------------')
+    console.log('函数内部－－', this);
+    console.log('函数参数－－', a);
+  }
+
+  let obj = {
+    a: 1,
+    b: 2
+  }
+
+  f.bind(obj, [1, 2])([3, 4]);
+  f.bind(null, [1, 2])();
+
+
+  //console.log(f.bind());
+
+
+  console.log(this instanceof f);
+
+</script>
+</body>
+</html>
