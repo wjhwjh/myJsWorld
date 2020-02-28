@@ -55,12 +55,29 @@
 
         1. 手写这几个函数的功能， 并搞懂其中的原理
 
+    </pre>
+</div>
 
+
+
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>实现一个 instanceof</h2>
+<div class="content">
+    <pre>
+        1. 判断变量对象是否在指定的原型
+
+        2. instanceof和typeOf的区别
+
+        3. 手写实现
+
+        4. while的使用
 
     </pre>
-
-
 </div>
+
+
 
 
 <h2>-------------------------------------------------------------------------------</h2>
@@ -68,7 +85,11 @@
 <h2>实现一个继承</h2>
 <div class="content">
     <pre>
+      1. 构造函数中变量的继承
 
+      2. 原型链的继承
+
+      3. 实现方式
 
     </pre>
 </div>
@@ -85,15 +106,14 @@
 </div>
 
 
-<h2>-------------------------------------------------------------------------------</h2>
-
-<h2>实现一个 instanceof</h2>
-<div class="content">
-    <pre>
 
 
-    </pre>
-</div>
+
+
+
+
+
+
 
 
 <h2>-------------------------------------------------------------------------------</h2>
@@ -201,32 +221,28 @@
     // 先判断调用bind的是否是函数，如果不是则抛出错误
     // this 指向调用bind的原函数
     const func = this;
-    context = context || window; // 没有设置context上下文，则指向window
+    context = context || window; // 指定的上下文，没有设置则指向window
 
     console.log(typeof func);
 
+    // 判断调用bind是否是函数
     if (typeof func !== 'function') {
       throw new TypeError('请使用函数调用bind')
     }
 
     // bind 返回一个绑定 this 的函数
     return function (...callArgs) {
-      console.log('callArgs-', callArgs);
+      // 这个作用域的this 的指向？？？？？？？？ window
+     // console.log('callArgs-', callArgs);
       let args = bindArgs.concat(callArgs);
-
       console.log('所有参数', args)
-
       console.log('执行函数this的指向－－', this)
-
       console.log('func----', func)
       console.log('func----', this instanceof func)
-
       //
       return func.call(context, ...args)
     }
   }
-
-
 
   function f(a) {
     console.log('-------------------------------')
@@ -238,15 +254,141 @@
     a: 1,
     b: 2
   }
-
   f.bind(obj, [1, 2])([3, 4]);
   f.bind(null, [1, 2])();
 
-
   //console.log(f.bind());
-
-
+  // instanceof 的作用
   console.log(this instanceof f);
+
+
+  console.log('instance--------------------------------------------------')
+
+   function instance_of(leftValue, rightValue) {
+       let rightPrototype = rightValue.prototype;
+
+       leftValue = leftValue.__proto__;
+
+       while (true){
+         //console.log('输出－－',leftValue);
+          // 最终返回的false
+          if (leftValue === null){
+             return false
+          }
+          // 最终返回true
+          if (leftValue === rightPrototype){
+            return true;
+          }
+          //向上一级原型链查找
+          leftValue = leftValue.__proto__;
+       }
+
+   }
+
+
+   function instance_of1(a, b){
+       // 这里使用while遍历查找原型链，用的很到位
+       while (a){
+           if(a.__proto__ === b.prototype)return true
+           a = a.__proto__;
+       }
+       return false;
+   }
+
+
+   let Person = function () {
+   }
+
+   let p = new Person();
+   let pObj = new Object();
+
+   console.log('1---', instance_of(p, Person));
+   console.log('1---',  instance_of(pObj, Person));
+
+
+  console.log('2---',instance_of1(p, Person));
+  console.log('2---', instance_of1(pObj, Person));
+
+
+  console.log('实现一个继承--------------------------------------------------')
+  // 参考《你所不知道的JavaScripts上卷》
+
+  // 第一种方法
+  // 基类
+  function Base(obj) {
+     this.name = obj.name;
+     this.age = obj.age;
+  }
+  Base.prototype.say = function () {
+    console.log('Base的原型');
+  }
+
+
+  // 派生类
+  function Derived(obj) {
+      this.work = obj.work;
+     // 类的继承
+     Base.call(this, obj);
+  }
+  Derived.prototype.hello = function(){
+     console.log('derived的原型')
+  };
+
+
+  Object.setPrototypeOf(Derived.prototype,Base.prototype);
+
+  let instance_d = new Derived({
+    name:'huizi',
+    age:18,
+    work:'web'
+  });
+
+  console.log(instance_d);
+  console.log(instance_d.__proto__);
+
+
+  // 第二种方法
+  function Supperclass() {
+     this.x = 0;
+     this.y = 0;
+  }
+
+  Supperclass.prototype.move = function (x, y) {
+     this.x += x;
+     this.y += y;
+     console.log('基类－－')
+  }
+
+  // 类继承
+  function SubClass() {
+    Supperclass.call(this);
+  }
+
+  // 原型继承，子类继承父类
+  SubClass.prototype = Object.create(Supperclass.prototype);
+
+  SubClass.prototype.constructor = SubClass;
+
+  let rect = new SubClass();
+
+  console.log('实例－－',rect);
+
+  console.log('rect instanceof Supperclass',rect instanceof Supperclass)
+  console.log('rect instanceof SubClass',rect instanceof SubClass)
+
+
+
+
+
+
+
+
+
+
+
+  // 第三种方法
+
+
 
 </script>
 </body>
