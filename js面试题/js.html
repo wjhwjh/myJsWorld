@@ -89,7 +89,11 @@
 
       2. 原型链的继承
 
-      3. 实现方式
+      3. 实现方式一
+
+      4. 实现方式二
+
+      5. 扩展
 
     </pre>
 </div>
@@ -313,7 +317,7 @@
   console.log('实现一个继承--------------------------------------------------')
   // 参考《你所不知道的JavaScripts上卷》
 
-  // 第一种方法
+  // 第一种方法, 使用Object.getPrototypeOf()继承
   // 基类
   function Base(obj) {
      this.name = obj.name;
@@ -347,7 +351,7 @@
   console.log(instance_d.__proto__);
 
 
-  // 第二种方法
+  // 第二种方法, 使用Object.creat()继承
   function Supperclass() {
      this.x = 0;
      this.y = 0;
