@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        body{
-          padding: 30px;
+        body {
+            padding: 30px;
         }
+
         * {
             padding: 0;
             margin: 0;
@@ -38,7 +39,15 @@
 
     1）typeof 来判断 number, string,  boolean, undefined, object, function, symbol 这七种类型;
 
-    2）typeof 在判断一个 object的数据的时候只能告诉我们这个数据是 object, 而不能细致的具体到是哪一种 object;
+    2）typeof 判断 number, string, boolean, undefined能准确判断出其类型
+
+       console.log(type 1);  // number
+       console.log(type 'name'); // string
+       console.log(type false);  // boolean
+       console.log(type undefined); //undefined
+
+
+    3）typeof在判断object的数据的时候只能告诉我们这个数据是object, 而不能细致的具体到是哪一种 object;
 
         typeOf null // "object"
 
@@ -91,53 +100,46 @@
 
 
 
-
-
-
-
-
-
 </pre>
 
 <script>
-let Person = function () {
+  let Person = function () {
 
-}
+  }
 
-Person.prototype.say = function(){
-  console.log('Person 的原型');
-}
+  Person.prototype.say = function () {
+    console.log('Person 的原型');
+  }
 
-let instance = new Person();
-instance.say();
-console.log(instance instanceof Person);  // true
+  let instance = new Person();
+  instance.say();
+  console.log('自定义构造函数－－',instance instanceof Person);  // true
 
-console.log('实例--',instance);
+  console.log('实例--', instance);
 
 
-let Child = function () {
+  let Child = function () {
 
-}
+  }
 
-Child.prototype = new Person();
+  Child.prototype = new Person();
 
-Child.prototype.hello = function(){
-  console.log('child原型')
-}
+  Child.prototype.hello = function () {
+    console.log('child原型')
+  }
 
-let c = new Child();
+  let c = new Child();
 
-c.hello();
-c.say();
-console.log('c实例', c);
-console.log(c instanceof Person);  // true
+  c.hello();
+  c.say();
+  console.log('c实例', c);
+  console.log(c instanceof Person);  // true
 
-console.log('实例原型的原型在原型链上找不到返回null----------------------------')
+  console.log('实例原型的原型在原型链上找不到返回null----------------------------')
 
-console.log(instance.__proto__ === Person.prototype);
-console.log(instance.__proto__.__proto__ === Object.prototype);
-console.log(instance.__proto__.__proto__.__proto__);
-
+  console.log(instance.__proto__ === Person.prototype);
+  console.log(instance.__proto__.__proto__ === Object.prototype);
+  console.log(instance.__proto__.__proto__.__proto__);
 
 
 </script>

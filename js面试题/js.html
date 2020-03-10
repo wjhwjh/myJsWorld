@@ -59,8 +59,6 @@
 </div>
 
 
-
-
 <h2>-------------------------------------------------------------------------------</h2>
 
 <h2>实现一个 instanceof</h2>
@@ -74,13 +72,13 @@
 
         4. while的使用
 
+        5. 原型链
+
     </pre>
 </div>
 
-
-
-
 <h2>-------------------------------------------------------------------------------</h2>
+
 
 <h2>实现一个继承</h2>
 <div class="content">
@@ -104,19 +102,81 @@
 <h2>实现一个 new</h2>
 <div class="content">
     <pre>
+        // 手动实现一个 new 关键字的功能的函数 _new(fun, args) --> new fun(args)
+
+       1. new操作符和构造函数结合，实例化一个出一个对象。 返回一个对象
+
+       2. 构造函数实例化后的对象有__proto__属性
+
+       // 函数
+
+       3. 函数也要看作是对象
+
+       4. 执行函数时要关注返回值，默认返回的是undefined，在此处实现new操作符的功能，要考虑函数的返回值
+
+       5. 每一个函数都会实现一个功能，具体实现什么功能是根据里边的代码决定的
+
+
 
 
     </pre>
 </div>
 
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>reduce 的实现</h2>
+<div class="content">
+    <pre>
+       1. 这个函数的含义
+
+          数组方法。 对数组中每个元素执行一次回调函数，将其结果汇总为单个返回值
+
+       2. 语法
+
+          arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+
+          参数
+
+          callback
+
+              accumulator 累计器累计回调的返回值
+
+              currentValue 当前操作的元素值
+
+          initialValue 初始化值， 可选
+
+          initialValue是否设置
 
 
 
 
+       3. 使用场景
+
+          对一个数组中的数字元素做累加操作
+
+    </pre>
+</div>
 
 
+<h2>节流</h2>
+<div class="content">
+    <pre>
 
 
+    </pre>
+</div>
+
+<h2>-------------------------------------------------------------------------------</h2>
+
+<h2>防抖</h2>
+<div class="content">
+    <pre>
+
+
+    </pre>
+</div>
+
+<h2>-------------------------------------------------------------------------------</h2>
 
 
 
@@ -141,16 +201,18 @@
     </pre>
 </div>
 
-
 <h2>-------------------------------------------------------------------------------</h2>
 
-<h2>reduce 的实现</h2>
+
+<h2>手写 Promise</h2>
 <div class="content">
     <pre>
 
 
     </pre>
 </div>
+
+
 
 <h2>-------------------------------------------------------------------------------</h2>
 
@@ -163,35 +225,6 @@
 </div>
 
 
-<h2>-------------------------------------------------------------------------------</h2>
-
-<h2>节流</h2>
-<div class="content">
-    <pre>
-
-
-    </pre>
-</div>
-
-<h2>-------------------------------------------------------------------------------</h2>
-
-<h2>防抖</h2>
-<div class="content">
-    <pre>
-
-
-    </pre>
-</div>
-
-<h2>-------------------------------------------------------------------------------</h2>
-
-<h2>手写 Promise</h2>
-<div class="content">
-    <pre>
-
-
-    </pre>
-</div>
 
 
 <h2>-------------------------------------------------------------------------------</h2>
@@ -237,7 +270,7 @@
     // bind 返回一个绑定 this 的函数
     return function (...callArgs) {
       // 这个作用域的this 的指向？？？？？？？？ window
-     // console.log('callArgs-', callArgs);
+      // console.log('callArgs-', callArgs);
       let args = bindArgs.concat(callArgs);
       console.log('所有参数', args)
       console.log('执行函数this的指向－－', this)
@@ -268,99 +301,109 @@
 
   console.log('instance--------------------------------------------------')
 
-   function instance_of(leftValue, rightValue) {
-       let rightPrototype = rightValue.prototype;
+  function instance_of(leftValue, rightValue) {
+    let rightPrototype = rightValue.prototype;
 
-       leftValue = leftValue.__proto__;
+    leftValue = leftValue.__proto__;
 
-       while (true){
-         //console.log('输出－－',leftValue);
-          // 最终返回的false
-          if (leftValue === null){
-             return false
-          }
-          // 最终返回true
-          if (leftValue === rightPrototype){
-            return true;
-          }
-          //向上一级原型链查找
-          leftValue = leftValue.__proto__;
-       }
+    while (true) {
+      //console.log('输出－－',leftValue);
+      // 最终返回的false
+      if (leftValue === null) {
+        return false
+      }
+      // 最终返回true
+      if (leftValue === rightPrototype) {
+        return true;
+      }
+      //向上一级原型链查找
+      leftValue = leftValue.__proto__;
+    }
 
-   }
-
-
-   function instance_of1(a, b){
-       // 这里使用while遍历查找原型链，用的很到位
-       while (a){
-           if(a.__proto__ === b.prototype)return true
-           a = a.__proto__;
-       }
-       return false;
-   }
+  }
 
 
-   let Person = function () {
-   }
+  function instance_of1(a, b) {
+    // 这里使用while遍历查找原型链，用的很到位
+    while (a) {
+      if (a.__proto__ === b.prototype) return true
+      a = a.__proto__;
+    }
+    return false;
+  }
 
-   let p = new Person();
-   let pObj = new Object();
 
-   console.log('1---', instance_of(p, Person));
-   console.log('1---',  instance_of(pObj, Person));
+  let Person = function () {
+  }
+
+  let p = new Person();
+  let pObj = new Object();
+
+  console.log('1---', instance_of(p, Person));
+  console.log('1---', instance_of(pObj, Person));
 
 
-  console.log('2---',instance_of1(p, Person));
+  console.log('2---', instance_of1(p, Person));
   console.log('2---', instance_of1(pObj, Person));
 
 
   console.log('实现一个继承--------------------------------------------------')
   // 参考《你所不知道的JavaScripts上卷》
+  /*
+   继承的本质是 构造函数的prototype属性对象的__proto__是指定一个构造函数的prototype属性对象
+  * */
 
   // 第一种方法, 使用Object.getPrototypeOf()继承
   // 基类
   function Base(obj) {
-     this.name = obj.name;
-     this.age = obj.age;
+    this.name = obj.name;
+    this.age = obj.age;
   }
+
   Base.prototype.say = function () {
     console.log('Base的原型');
   }
+  Base.prototype.addFn = function () {
+    console.log('新增Base的原型方法');
+  }
+  console.log('基本类型实例－－－', new Base({name: 'xixi', age: 10}))
 
 
   // 派生类
   function Derived(obj) {
-      this.work = obj.work;
-     // 类的继承
-     Base.call(this, obj);
+    this.work = obj.work;
+    // 类的继承，构造函数中属性和方法的继承
+    Base.call(this, obj);
   }
-  Derived.prototype.hello = function(){
-     console.log('derived的原型')
+
+  Derived.prototype.hello = function () {
+    console.log('derived的原型')
   };
 
-
-  Object.setPrototypeOf(Derived.prototype,Base.prototype);
+  // 原型链的继承，派生类原型继承基类的原型
+  // 本质是改变派生类prototype属性对象的__proto__属性，也就是派生类prototype属性对象的原型
+  Object.setPrototypeOf(Derived.prototype, Base.prototype);
 
   let instance_d = new Derived({
-    name:'huizi',
-    age:18,
-    work:'web'
+    name: 'huizi',
+    age: 18,
+    work: 'web'
   });
 
-  console.log(instance_d);
-  console.log(instance_d.__proto__);
+  console.log('第一种方法，继承后实际化－－－', instance_d);
+  //console.log(instance_d.__proto__);
 
 
   // 第二种方法, 使用Object.creat()继承
   function Supperclass() {
-     this.x = 0;
-     this.y = 0;
+    this.x = 0;
+    this.y = 0;
   }
 
   Supperclass.prototype.move = function (x, y) {
-     this.x += x;
-     this.y += y;
-     console.log('基类－－')
+    this.x += x;
+    this.y += y;
+    console.log('基类－－')
   }
 
   // 类继承
@@ -368,30 +411,80 @@
     Supperclass.call(this);
   }
 
+
   // 原型继承，子类继承父类
+
   SubClass.prototype = Object.create(Supperclass.prototype);
 
   SubClass.prototype.constructor = SubClass;
 
+  SubClass.prototype.say = function () {
+    console.log('派生类方法');
+  }
+
   let rect = new SubClass();
 
-  console.log('实例－－',rect);
+  console.log('派生类实例化－－', rect);
 
-  console.log('rect instanceof Supperclass',rect instanceof Supperclass)
-  console.log('rect instanceof SubClass',rect instanceof SubClass)
+  console.log('rect instanceof Supperclass', rect instanceof Supperclass)
+  console.log('rect instanceof SubClass', rect instanceof SubClass)
 
-
-
-
-
-
-
-
-
+  console.log('获取rect的原型', Object.getPrototypeOf(rect))
+  console.log('Object.getPrototypeOf获取对象的原型', Object.getPrototypeOf(rect) === SubClass.prototype) // true
 
 
   // 第三种方法
+  console.log('实现一个new方法--------------------------------------------------')
 
+  function _new(fun, ...arg) {
+    //console.log('fun--',fun);
+    //
+    console.log('fun执行函数------', fun.prototype)
+    let obj = Object.create(fun.prototype);
+
+    //执行函数的返回值
+    let res = fun.call(obj, ...arg);
+
+   // 执行函数返回值不是null并且是object或者function时，返回执行函数后的返回值
+   // 使用函数时，注意函数的返回值
+    if (res !== null && (typeof res === 'object' || typeof res === 'function')) {
+      console.log('返回值res----', res)
+      return res
+    }
+    return obj
+  }
+
+
+  function NewFn(a) {
+    this.a = a;
+    //console.log(this.a);
+    return {w: 1, a: 3}
+  }
+
+  let newObj = _new(NewFn, 2);
+  console.log('执行结果－－－', newObj);
+
+  /*
+   1. 函数也可以看作是对象
+  */
+
+  console.log('-----------函数---------------')
+
+  let newOj = {
+    a: 2,
+    b: 4
+  };
+
+  function NewFn1() {
+    console.log(this);
+    return {d:1,e:2}
+  }
+
+  let fff = NewFn1.call(newObj);
+
+
+  console.log(NewFn1.prototype);
+  console.log('---', fff);
 
 
 </script>

@@ -7,7 +7,7 @@
 <body>
 
 <script>
-  console.log('f-------- 点击改变this指向')
+  console.log('f-------- 点击改变this指向，使用的是函数bind方法')
 
   function f(...arg) {
     console.log('参数 ', arg)
@@ -19,6 +19,16 @@
     a: 1
   }
   document.onclick = f.bind(obj, [1, 2, 3, 4]);
+
+
+  console.log('----使用call改变函数中this的指向-----');
+
+  function fnCall(){
+     console.log('call改变this指向－',this)
+  }
+
+  fnCall.call(obj);
+
 
   console.log('f1------------------')
   // 函数页可以被看作是对象
