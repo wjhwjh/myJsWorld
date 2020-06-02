@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
     <style>
-        body{
+        body {
             padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
         }
+        
         * {
             padding: 0;
             margin: 0;
@@ -15,26 +18,114 @@
             border: none;
             box-sizing: border-box;
         }
-
+        
         h2 {
             text-align: center;
             padding: 15px 0;
+            font-size: 20px;
+            font-weight: normal;
         }
-
+        
         pre {
             font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
         }
-
-
+        
+        .list {
+            display: flex;
+            width: 400px;
+            height: 150px;
+            margin: auto;
+            margin-bottom: 50px;
+            border: 1px solid #000;
+        }
+        
+        .list li {
+            border-right: 1px solid #000;
+        }
+        
+        .list li:nth-last-child(1) {
+            border-right: 0;
+        }
+        
+        .list1 li {
+            flex-grow: 1;
+        }
+        
+        .list2 li:nth-child(3) {
+            flex-grow: 1;
+            background: #f00;
+        }
+        /* ul3 */
+        
+        .list3 li:nth-child(1) {
+            width: 250px;
+            background: #f00;
+            flex-shrink: 0;
+        }
+        
+        .list3 li:nth-child(2) {
+            width: 200px;
+            background: #f00;
+        }
+        
+        .list3 li:nth-child(3) {
+            flex-shrink: 1;
+            background: #f00;
+        }
+        /* ul4 */
+        
+        .list4 li:nth-child(1) {
+            flex-basis: 200px;
+            background: #f00;
+        }
     </style>
 
 </head>
+
 <body>
-<!-- 弹性盒子中flex：0 1 auto; 的含义 -->
+    <!-- 弹性盒子中flex：0 1 auto; 的含义 -->
+    <pre>
+        简要说明
+
+        flex属性是下边 flex-grow、flex-shirnk、flex-basis这3个属性的缩写，后边2个可以省略不写.
+
+        flex这个属性真香~~
+    </pre>
+    <h2>证明flex属性只有一个值时，代表每个子元素都会放大</h2>
+    <ul class="list list1">
+        <li>第一个元素</li>
+        <li>第二个元素</li>
+        <li>第三个元素</li>
+    </ul>
+
+    <h2>证明flex-grow属性的用法, 默认值是0，有剩余空间也不放大。 如果为1则放大</h2>
+    <ul class="list list2">
+        <li>第一个元素</li>
+        <li>第二个元素</li>
+        <li>第三个元素</li>
+    </ul>
+    <h2>证明flex-shirnk属性的用法， 默认值为1，空间不足就缩小。如果是0则不变。设置item选项这个值为0时，这个DOM元素不会被缩小。</h2>
+    <ul class="list list3">
+        <li>第一个元素</li>
+        <li>第二个元素</li>
+        <li>第三个元素</li>
+    </ul>
+    <h2>证明flex-basise属性的用法</h2>
+    <ul class="list list4">
+        <li>第一个元素</li>
+        <li>第二个元素</li>
+        <li>第三个元素</li>
+    </ul>
 
 
-<script>
 
-</script>
+
+
+    <script>
+    </script>
 </body>
+
 </html>
