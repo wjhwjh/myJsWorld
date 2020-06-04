@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            padding: 30px;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+        }
+        
+        pre {
+            font-size: 16px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <script>
+        var productExceptSelf = function(nums) {
+
+            if (nums == null || nums.length == 1) {
+                return false;
+            }
+            let n = nums.length;
+            let res = new Array(n).fill(1);
+
+            let left = 1,
+                right = 1;
+            for (let i = 0; i < n; i++) {
+
+                res[i] *= left;
+                //console.log(left);
+
+                left *= nums[i];
+
+                res[n - 1 - i] *= right;
+
+                right *= nums[n - 1 - i]
+            }
+
+            return res
+
+
+        };
+
+        let arr = [1, 2, 3, 4];
+        console.log(productExceptSelf(arr));
+
+
+        let arr1 = [2, 4, 1, 3];
+        let num = 1;
+        let res = 1;
+        for (let i = 0; i < arr1.length; i++) {
+            res *= num;
+            num = arr[i];
+            console.log(res);
+        }
+    </script>
+</body>
+
+</html>
