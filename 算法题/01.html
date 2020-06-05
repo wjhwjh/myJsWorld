@@ -37,9 +37,6 @@
 </head>
 
 <body>
-
-
-
     <script>
         // 方法一，利用双向指针, 这样看着比较高级
         // while循环，时间复杂度也是O(n)
@@ -49,7 +46,6 @@
             //双向指针最优解
             let i = 0,
                 j = 1;
-            let arr = [];
             while (j < nums.length) {
                 if (nums[i] == nums[j]) {
                     j++;
@@ -63,8 +59,6 @@
         };
         let nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
         console.log(removeDuplicates(nums));
-
-
 
         // 方法二，声明一个中间变量，一个for循环，时间复杂度也是O(n)
         // for 循环
