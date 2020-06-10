@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>两数之和</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        //求数组中两数之和
+        // 使用普通的方法，for循环嵌套用前边的数依次和后边的数想加
+        // 这样运行的速度很慢
+        var twoSum = function(nums, target) {
+            if (nums == null || nums.length == 0) return;
+
+            for (let i = 0; i < nums.length - 1; i++) {
+                for (j = i + 1; j < nums.length; j++) {
+                    if (nums[i] + nums[j] == target) {
+                        return [i, j]
+                    }
+                }
+            }
+        };
+
+
+        //indexOf()方法隐藏的实质就是遍历数组，匹配给定的字符，数组中如果不存在则返回-1，如果存在返回对应的下标
+        // 在遍历数组时，改变数组的长度时会影响下次的遍历
+        // 
+        var twoSum1 = function(nums, target) {
+            if (nums == null || nums.length == 0) return;
+            let n = nums.length;
+            let dis; // 用于存放差值
+            while (n > 1) {
+                let last = nums.pop();
+                dis = target - nums[n];
+                if (nums.indexOf(dis) > -1) {
+                    return [nums.indexOf(dis), n]
+                }
+                n--;
+            }
+        };
+
+
+        // 改变数组的长度
+
+        let changeArray = function(nums) {
+            if (nums == null || nums.length == 0) return;
+            for (let index = nums.length; index > 1; index--) {
+                console.log('index最小的值--', index);
+                console.log('数组的长度', nums.length);
+                nums.pop();
+            }
+            return nums
+        }
+        let arr = [1, 2, 3, 4, 2];
+        console.log('改变数组--', changeArray(arr));
+    </script>
+</body>
+
+</html>

@@ -38,6 +38,7 @@
 
 <body>
     <script>
+        // 为一个排好序的数组去重
         // 方法一，利用双向指针, 这样看着比较高级
         // while循环，时间复杂度也是O(n)
         var removeDuplicates = function(nums) {
@@ -66,7 +67,7 @@
             if (nums == null || nums.length == 0) return;
             //
             let temp = nums[0];
-            let arr = [];
+            let arr = []; //创建一个新数组，存储去重之后的数
             for (let i = 1; i < nums.length; i++) {
                 arr[0] = nums[0];
                 if (nums[i] != temp) {
