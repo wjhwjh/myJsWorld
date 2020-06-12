@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>两数相加</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        // join()把数组转化为字符串
+        // split()把字符串转化为数组
+        // reverse()把数组元素倒置
+        // 这种方法在leetcode跑不通
+        var addTwoNumbers = function(l1, l2) {
+            let num1 = l1.reverse().join('') | 0; // 把字符串转化为数组
+            let num2 = l2.reverse().join('') | 0;
+            let res = num1 + num2;
+            console.log(res);
+            let resArr = res.toString().split('').reverse();
+            return resArr;
+        };
+
+        //addTwoNumbers([1, 2, 3])
+        console.log(addTwoNumbers([2, 4, 3], [5, 6, 4]));
+
+        // 第二种方法
+        var addTwoNumbers1 = function(l1, l2) {
+            let arr = [];
+            // for (let i = 0; i < l1.length; i++) {
+            //     arr.push(l1[i] + l2[i])
+            // }
+            // console.log(arr);
+            let num1 = l1.join('') | 0; // 把字符串转化为数组
+            let num2 = l2.join('') | 0;
+            let res = num1 + num2;
+            arr = res.split();
+            console.log(res);
+        };
+
+        addTwoNumbers1([2, 4, 3], [5, 6, 4])
+    </script>
+</body>
+
+</html>
