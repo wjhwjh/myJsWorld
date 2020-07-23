@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>两数相加</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        var lengthOfLongestSubstring = function(s) {
+            let arr = [],
+                max = 0;
+            for (let i = 0; i < s.length; i++) {
+                let index = arr.indexOf(s[i]);
+                console.log(arr);
+
+                if (index !== -1) {
+                    //console.log(index);
+                    //    
+                    arr.splice(0, index + 1)
+                        //console.log(arr)
+                }
+                arr.push(s[i]);
+                max = Math.max(arr.length, max);
+            }
+
+            return max
+
+        };
+        //lengthOfLongestSubstring("bcadeaaaaa");
+
+        console.log(lengthOfLongestSubstring("bcadefaaaaa"))
+    </script>
+</body>
+
+</html>
