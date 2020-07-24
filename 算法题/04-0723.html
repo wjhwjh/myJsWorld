@@ -38,18 +38,17 @@
 
 <body>
     <script>
-        /*
-                         实现：无重复字符的最长子串，
-                         对字符串中无重复子串的理解
-                                            
-                                            */
-
+        // 实现：无重复字符的最长子串，
+        // 对字符串中无重复子串的理解
         var lengthOfLongestSubstring = function(s) {
             let arr = [],
                 max = 0;
+            // 字符串也有长度属性，str.length, 可以用来进行遍历    
             for (let i = 0; i < s.length; i++) {
+                // indexOf()如果找到就返回元素在数组中对应的下标，如果没找到就返回-1
                 let index = arr.indexOf(s[i]);
-                console.log(arr);
+                //console.log(arr);
+                // 如果index !==-1 时说明找到了相同的元素，此时则是另一个子串了
                 if (index !== -1) {
                     //console.log(index);
                     // splice()方法返回删除后的数组元素组成的数组
@@ -57,8 +56,11 @@
                     arr.splice(0, index + 1)
                         //console.log(arr)
                 }
-                arr.push(s[i]);
-                max = Math.max(arr.length, max);
+                // 当index返回值为字符在数组中对应的元素下标，此时执行了上边的if条件语句
+                // 当index返回值是-1时，不执行上边if条件模块，此时要找的字符串还在累积当中
+                // chartAt()获取字符串指定下标的字符
+                arr.push(s[i]); // 把对应的字符存入到arr数组中
+                max = Math.max(arr.length, max); // 记录最大值，每次都计算出一个最大值，只要是arr数组改变了都要记下数组的长度
             }
             return max
 
@@ -66,6 +68,28 @@
         //lengthOfLongestSubstring("bcadeaaaaa");
 
         console.log(lengthOfLongestSubstring("bcadefaaaaa"))
+
+
+        var lengthStr = function(s) {
+            let arr = [],
+                max = 0,
+                len = s.length,
+                i = 0;
+            while (i < len) {
+                let index = arr.indexOf(s[i])
+                    // 这是正向思维，改进后就是上边的情况
+                if (index == -1) { // 说明不在
+                    arr.push(s[i])
+                } else { // 如果存在的，改变当前数组
+                    arr.splice(0, index + 1)
+                    arr.push(s[i])
+                }
+                max = Math.max(arr.length, max)
+                i++
+            }
+            return max
+        }
+        console.log('第二种方法', lengthStr("bcadefaaaaa"))
     </script>
 </body>
 
