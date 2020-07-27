@@ -38,6 +38,7 @@
 
 <body>
     <script>
+        // 维护数组
         // 实现：无重复字符的最长子串，
         // 对字符串中无重复子串的理解
         var lengthOfLongestSubstring = function(s) {
@@ -91,7 +92,44 @@
         }
         console.log('第二种方法', lengthStr("bcadefaaaaa"))
 
-        // 其它解法
+        // 维护下标
+        let lengthString = function(s) {
+                let i = 0,
+                    max = 0;
+                for (let j = 0; j < s.length; j++) {
+                    let index = s.subString(i, j).indexOf(s[j]);
+                    if (index !== -1) {
+                        // i是当前不重复子串的起始下标，index是遍历当前元素在子串中的下标
+                        // i+index+1计算下次出现不重复子串的起始下标
+                        i = i + index + 1;
+                    }
+                    // j-i+1 的长度是包括当前字符的子串
+                    max = Math.max(max, j - i + 1);
+                }
+
+                return max
+            }
+            // indexOf()方法可用于字符串和数组
+            // subString()参数是闭开区间
+            // splice()返回的是改变的元素的数组，数组本身经过操作后的
+
+        // 优化map
+        let lengthMap = function(s) {
+            let map = new Map(),
+                i = 0,
+                max = 0;
+            for (let j = 0; j < s.length; j++) {
+                if (map.has(s[j])) {
+                    // i = Math.max(map.get(s[j]) + 1, i);
+                    i = map.get(s[j]) + 1;
+                }
+                map.set(s[j], j);
+                max = Math.max(max, j - i + 1);
+            }
+            return max
+        }
+
+        console.log('第三种方法', lengthMap("bcadefaaaaa"))
     </script>
 </body>
 
