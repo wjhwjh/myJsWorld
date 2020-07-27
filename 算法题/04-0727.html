@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>在排序数组中查找元素的第一个和最后一个位置</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        //给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+        //你的算法时间复杂度必须是 O(log n) 级别
+
+
+        // 自己解题方法
+        var searchRange = function(nums, target) {
+            if (nums.length === 0) return false;
+            let index = nums.indexOf(target);
+            let arr = [];
+            arr.push(index);
+            if (index !== -1) {
+                let i = index;
+                while (i < nums.length) {
+                    if (nums[i] !== target) {
+                        arr.push(i - 1);
+                        return arr
+                    }
+                    i++;
+                }
+            } else {
+                return [-1, -1]
+            }
+        };
+        console.log(searchRange([1, 2, 2, 2, 3, 4], 2));
+
+        // 第二种解题方法
+        // 理清楚二分查找的思路，如何运用到当前的题目中
+        // 如何用代码实现
+    </script>
+</body>
+
+</html>
