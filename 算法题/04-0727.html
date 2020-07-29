@@ -94,8 +94,6 @@
                 right = nums.length - 1;
             let start = 0,
                 end = 0;
-
-
             // while条件控制语句，更灵活一些，在这个条件下执行的代码块也更灵活，相对于for循环    
             // 执行完这个while没有返回值，说明不存在这样的值    
             while (left <= right) {
@@ -103,7 +101,6 @@
                 //left += 3
                 // 获取每次执行后的中间坐标，进而获取中间值，普通数学获取中间值的方法，结合数组
                 mid = left + (right - left) / 2 | 0; // 管道符代表向下取整
-
                 // 中间值和目标值进行比较
                 if (nums[mid] === target) {
                     start = mid;
