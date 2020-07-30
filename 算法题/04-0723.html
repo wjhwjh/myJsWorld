@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>两数相加</title>
+    <title>字符串中不重复出现的最长的子串</title>
 
     <style>
         body {
@@ -92,6 +92,33 @@
         console.log('第二种方法', lengthStr("bcadefaaaaa"))
 
         // 其它解法
+        // 利用map对象存储数据的数据结构
+        let map = new Map([
+            [
+                'a', 0
+            ],
+            [
+                'b', 1
+            ],
+            [
+                'c', 2
+            ],
+            ['a', 3],
+            ['e', 1],
+            ['a', 2]
+        ]);
+        console.log('输出定义的map结构－－－－－－', map)
+            /*
+                利用map存储遍历后的值和下标，i为不重复子串的起始下标，j为遍历的当前下标
+            */
+        let mapLengthString = function(s) {
+            let map = new Map,
+                i = 0,
+                max = 0;
+            for (let j = 0; j < s.length; j++) {
+
+            }
+        }
     </script>
 </body>
 
