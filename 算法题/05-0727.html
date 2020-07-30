@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>在排序数组中查找元素的第一个和最后一个位置</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <pre>
+        这道题主要的思路是使用二分查找的实现
+        
+        关于二分查找
+        前提条件是数组元素是有序的
+        
+        1. 找到数组元素的中间值，实际是找到数组元素的中间坐标mid
+        2. 根据中间坐标获取中间值，与目标值进行对比
+        3. 比较结果有3种，相等、大于、小于
+        4. 如果是相等，则向两边进行扩展，直到左右都没有目标值时，返回扩展的下标
+        5. 如果目标值大于中间值，说明目标值在中间值的右边，左边的区间下标指针移到中间指针的的下一个
+        6. 如果目标值小于中间值，说明目标值在中间值的左边，右边区间下标指针移到中间指针的前一个
+        7. 执行的条件是right>=left
+
+        -----------------------
+        如何回顾，想那些问题？？
+        在自己实现的时候，每个环节都不能少
+    </pre>
+    <script>
+        //给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+        //你的算法时间复杂度必须是 O(log n) 级别
+
+
+        // 自己解题方法，这个的时间复杂度是O(n)
+        var searchRange = function(nums, target) {
+            if (nums.length === 0) return [-1, -1];
+            let start = nums.indexOf(target);
+            let end = start;
+            // arr.push(index);
+            if (start !== -1) {
+                let i = start;
+                while (i < nums.length) {
+                    if (nums[i] !== target) {
+                        end = i - 1;
+                        break;
+                    }
+                    i++;
+                }
+                return [start, end]
+            } else {
+                return [-1, -1]
+            }
+        };
+        console.log(searchRange([1, 2, 2, 2, 3, 4], 2));
+        console.log('--------------------------------------------------')
+
+        // 第二种解题方法
+        // 理清楚二分查找的思路，如何运用到当前的题目中
+        // 如何用代码实现
+        var searchRange1 = function(nums, target) {
+            if (nums.length === 0) return [-1, -1];
+            // 都设置为中间变量，这里如何确定？？是设置为全局变量还是局部变量
+            let left = 0,
+                right = nums.length - 1;
+            let start = 0,
+                end = 0;
+            // while条件控制语句，更灵活一些，在这个条件下执行的代码块也更灵活，相对于for循环    
+            // 执行完这个while没有返回值，说明不存在这样的值    
+            while (left <= right) {
+                // console.log('这是符合条件的数组');
+                //left += 3
+                // 获取每次执行后的中间坐标，进而获取中间值，普通数学获取中间值的方法，结合数组
+                mid = left + (right - left) / 2 | 0; // 管道符代表向下取整
+                // 中间值和目标值进行比较
+                if (nums[mid] === target) {
+                    start = mid;
+                    end = mid;
+                    // 如果相等则向两边扩展start > left &&  end < right &&
+                    while (start > left && nums[start] === nums[start - 1]) start--;
+                    while (end < right && nums[end] === nums[end + 1]) end++;
+                    return [start, end];
+                } else if (nums[mid] > target) { // 目标值小于中间值
+                    right = mid - 1;
+                } else { // 目标值大于中间值
+                    left = mid - 1;
+                }
+            }
+            return [-1, -1]
+            console.log(left)
+        }
+        console.log(searchRange1([1, 2, 2, 2, 3, 4], 2));
+
+        //二分法查找
+        var searchRange2 = function(nums, target) {
+            if (!nums.length) return [-1, -1];
+            let left = 0;
+            let right = nums.length - 1;
+            let start = 0,
+                end = 0;
+
+            while (left <= right) {
+                let mid = left + (right - left) / 2 | 0; // 取中间值
+                if (nums[mid] === target) {
+                    start = mid;
+                    end = mid;
+                    break;
+                } else if (nums[mid] > target) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1
+                }
+            }
+            if (left > right) return [-1, -1];
+            while (nums[start] === nums[start - 1]) start--;
+            while (nums[end] === nums[end + 1]) end++;
+            return [start, end]
+        }
+        console.log(searchRange2([1, 2, 2, 2, 3, 4], 2));
+    </script>
+</body>
+
+</html>
