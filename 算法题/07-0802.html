@@ -54,11 +54,77 @@
 
         提示：
         本题中的空白字符只包括空格字符 ' ' 。
-        假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
+        假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
     </pre>
 
 
     <script>
+        // 
+        // 1. 去掉字符串中前后端的空格， 使用的是方法String.trim()
+        // 2. 这个范围判断可以直接用214748...那个值
+        // 3. 字符串中截取数字，只要判断开头是有效数字的字符串,如何实现？ 获取去掉空格后的一个字符进行判断
+        //  如果非有效整数则这个字符串不满足条件
+        // 4. 在符合条件的字符串中截取有效整数
+
+        // 第一种方法 parseInt() 获取字符串中的数字
+        // 第二种方法 使用正则表达式匹配 
+        // 第三种方法 就是一步一步判断
+        var myAtoi = function(str) {
+            console.log('字符串输出');
+            let number = parseInt(str, 10);
+            // 如果值是NaN, 返回false
+            if (isNaN(number)) {
+                return false
+            } else if (number > Math.pow(2, 31) - 1 || number < Math.pow(-2, 31)) {
+                // 边界值判断，如果小于最小值则取最小值，如果大于最最大值就取最大值
+                // 三元运算符
+                return number < Math.pow(-2, 31) ? Math.pow(2, -31) : Math.pow(2, 31) - 1
+            } else { // 所有要值
+                return number
+            }
+        };
+        console.log(myAtoi('2348475985748548547594'))
+            // parseInt(string, radix)
+            // parseInt()返回的值是有效整数或者是NaN两种情况,在使用的时候应该注意这一点.
+            // Math.pow(x,y) 指的是底数是x,y幂数， x的y次冥
+            //
+        let str = "klxjkv";
+        console.log(parseInt(str));
+        // isNaN() 是一个特殊的函数，用来判断指定的值是否是NaN
+        // NaN是一个特殊值，不与任何值相等也不与自身相等。 判断一个值是否是NaN使用内置函数isNaN
+
+
+
+
+        var myAtoi1 = function(str) {
+            //console.log(str)
+            // 去掉字符串前后端的空格
+            str = str.trim();
+            let firstLetter = str.charAt(0);
+            let len = str.length;
+            let number = '';
+            if (/^[1-9]/.test(str.charAt(1))) {
+                // console.log('符合条件的字符串－－', str);
+                // if (firstLetter === "-") {
+                //     console.log('这里输出的是带负号的值')
+                // } else if (firstLetter === "+") {} else {}
+                for (let i = 1; i < str.length; i++) {
+                    if (!(/^[1-9]/.test(str[i]))) {
+                        firstLetter === '-' ? number = '-' + number : number;
+                        return parseInt(number)
+                    }
+                    number += str[i];
+                }
+
+            } else {
+                return false
+            }
+        }
+
+        myAtoi1(' -87kjdfksdfl');
+        myAtoi1(' -kdsjfdsfkjdfksdfl');
+        myAtoi1('＋87879kdsjfdsfkjdfksdfl');
+        console.log(myAtoi1(' -87kjdfksdfl'))
     </script>
 </body>
 
