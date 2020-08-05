@@ -97,25 +97,31 @@
 
 
         var myAtoi1 = function(str) {
-            //console.log(str)
-            // 去掉字符串前后端的空格
             str = str.trim();
             let firstLetter = str.charAt(0);
             let len = str.length;
             let number = '';
-            if (/^[1-9]/.test(str.charAt(1))) {
-                // console.log('符合条件的字符串－－', str);
-                // if (firstLetter === "-") {
-                //     console.log('这里输出的是带负号的值')
-                // } else if (firstLetter === "+") {} else {}
-                for (let i = 1; i < str.length; i++) {
-                    if (!(/^[1-9]/.test(str[i]))) {
+            let idx = (firstLetter === '-' || firstLetter === '+') ? 1 : 0;
+            console.log(str);
+            console.log('开始的位置inx', idx);
+
+            // 如果第一个字符是符号，第二个字符是数字，才有继续循环的必要
+            if (/^[1-9]/.test(str.charAt(idx))) {
+                // console.log('这是要处理的数据－－',str);
+                for (let i = idx; i < len; i++) {
+
+                    if (isNaN(parseInt(str[i]))) {
                         firstLetter === '-' ? number = '-' + number : number;
                         return parseInt(number)
                     }
                     number += str[i];
+                    if (parseInt(str[len - 1])) {
+                        firstLetter === '-' ? number = '-' + number : number;
+                        return parseInt(number)
+                    }
+                    console.log('这是循环得到的数据', number)
+                        //return parseInt(number)
                 }
-
             } else {
                 return false
             }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>
+
+    </h2>
+    <pre>
+
+</pre>
+    <script>
+        // 正则表达式
+        // 集合 （）
+        // 范围词 ［］, 大多数具有特殊意义的符号在范围词里不再有特殊意义了
+        // 个数｛｝
+        // g 全局匹配 i 不分大小写
+        // . 除了换行符（\r,\n）之外，所有的符号都在它匹配的范围内
+        // + 1次或无数次
+        // ? 0次或1次
+        // ＊ 0次或无数次
+
+        let str = 'fenging';
+        let reg = /feng(yu|ing)/;
+        let s1 = str.replace(reg, '123'); //repalce()是字符串的方法
+        console.log(s1)
+    </script>
+</body>
+
+</html>
