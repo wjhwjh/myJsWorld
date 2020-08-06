@@ -41,6 +41,29 @@
     <pre>
     </pre>
     <script>
+        var isPalindrome = function(x) {
+            // let left = 0;
+            // let right = x.length - 1;
+            x = x.toString();
+            let res = '';
+            for (let i = x.length - 1; i >= 0; i--) {
+                res += x[i];
+
+            }
+            if (x === res) {
+                return true
+            } else {
+                return false
+            }
+        };
+        console.log(isPalindrome(-125651));
+        isPalindrome(-125651);
+        // isPalindrome(12122);
+
+        var isPalindrome = function(x) {
+            let left = 0;
+            let right = x.length - 1;
+        }
     </script>
 </body>
 
