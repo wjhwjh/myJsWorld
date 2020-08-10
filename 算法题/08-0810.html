@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字符串相乘</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。</h2>
+    <pre>
+    </pre>
+    <script>
+        var multiply = function(num1, num2) {
+            let res = 0;
+            if (num1.length >= 110 || num2.length >= 110) return false;
+            // 写一个正则，判断一个字符串是否是十进制整数
+            // 1-9开头，以0个或多个0-9数字结尾的正则
+            if (/^[1-9]\d*$/.test(num1) && /^[1-9]\d*$/.test(num2)) {
+                res = Number(num1) * Number(num2)
+            }
+            return res
+        };
+        multiply('sdskfj111', 'sddf');
+        multiply('111', '345');
+        multiply('111sdfdsf', 'sddf');
+        multiply('0', 'sddf');
+        multiply('0234', 'sddf');
+
+        var multiply1 = function(num1, num2) {}
+    </script>
+</body>
+
+</html>
