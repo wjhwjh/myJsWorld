@@ -66,7 +66,8 @@
 
   // 惰性单例模式，是使用很广泛的一种，通过函数调用实现
   function getSinglton(fn){
-
+   console.log(this);
+   return fn.apply()
   } 
 
 
@@ -88,9 +89,13 @@ let creatB = function(){
 }
 
 
+function render(){
+  let a = getSinglton(creatA);
 
+  console.log('这是一个返回值--',a);
+}
 
-
+render();
 
   </script>
 </body>
