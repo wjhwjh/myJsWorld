@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>单例模式</title>
-    <style>
-        *{
-            font-size: 16px;
-        }
 
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <title>单例模式</title>
+  <style>
+    * {
+      font-size: 16px;
+    }
+  </style>
 </head>
+
 <body>
-<pre>
+  <pre>
   单例模式
 
   概念：保证一个类仅有一个实例对象，并提供唯一一个访问它的全局访问点。（类、实例对象，访问点）
@@ -30,69 +31,68 @@
 
 </pre>
 
-<script>
+  <script>
 
-//类
-class CreateUser{
-    constructor(name){
+    //类
+    class CreateUser {
+      constructor(name) {
         this.name = name;
         this.getName();
+      }
+      getName() {
+        console.log('name-', this.name)
+      }
     }
 
-    getName(){
-      console.log('name-',this.name)
-    }
+    // 代理实现单例模式
+    // 闭包，通过返回函数，返回一个实例对象
+    let proxyMode = function () {
+      // 利用闭包概念，创建一个变量存放类的对象
+      let instance = null;
+      return function (name) {
+        if (!instance) {
+          instance = new CreateUser(name)
+        }
+        return instance;
+      }
+    };
+    let p = proxyMode();
+    let obj1 = p('aa');
+    let obj2 = p('bb');
+    console.log('用代理的方式实现单例模型--',obj1 === obj2)
 
+   // 用构造函数挂载的方式单例模式
+
+
+  // 惰性单例模式，是使用很广泛的一种，通过函数调用实现
+  function getSinglton(fn){
+
+  } 
+
+
+// 创建单例A
+let creatA = function(){
+  let instance;
+  if(!instance){
+    instance = 'A'; // 这里创建实例
+  }
+  return instance
+}
+// 创建单例B
+let creatB = function(){
+  let instance;
+  if(!instance){
+    instance = 'B';
+  }
+  return instance
 }
 
-// 代理实现单例模式
-// 闭包，通过返回函数，返回一个实例对象
-let proxyMode =function () {
-  // 利用闭包概念，创建一个变量存放类的对象
-  let instance = null;
-
-  //console.log(instance);
-  return function (name) {
-    //console.log(1111,instance);
-    if(!instance){
-      instance = new CreateUser(name)
-    }
-    return instance;
-  }
-};
-let p = proxyMode();
-console.log(p); // 返回一个函数
-let obj1 =p('aa');
-let obj2 =p('bb');
-console.log(obj1)
-console.log(obj2)
-console.log(obj1===obj2)
-
-console.log('立即执行函数－－－－－－－－－－－－－－－－－－－－')
-
-// 立即执行
-let proxyMode1 =(function () {
-  // 利用闭包概念，创建一个变量存放类的对象
-  let instance = null;
-  return function (name) {
-    //console.log(1111,instance);
-    if(!instance){
-      instance = new CreateUser(name)
-    }
-    return instance;
-  }
-})();
-
-let obj3 =proxyMode1('cc');
-let obj4 =proxyMode1('dd');
-console.log(obj3)
-console.log(obj4)
-console.log(obj3===obj4)
 
 
 
 
 
-</script>
+  </script>
 </body>
+
 </html>
