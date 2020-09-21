@@ -62,16 +62,21 @@
     console.log('用代理的方式实现单例模型--',obj1 === obj2)
 
    // 用构造函数挂载的方式单例模式
-
+console.log('---华丽的分割线----------------------------------------------------')
 
   // 惰性单例模式，是使用很广泛的一种，通过函数调用实现
   function getSinglton(fn){
-   console.log(this);
-   return fn.apply()
+   //console.log(this);
+   let result;
+   // return fn.apply()
+   return function(){
+     console.log('这个this指向哪里呢',this)
+     return result || (result = fn.apply(this))
+   }
   } 
 
 
-// 创建单例A
+// 创建单例
 let creatA = function(){
   let instance;
   if(!instance){
@@ -87,12 +92,13 @@ let creatB = function(){
   }
   return instance
 }
-
-
+let a = getSinglton(creatA);
+let b = getSinglton(creatB);
 function render(){
-  let a = getSinglton(creatA);
-
-  console.log('这是一个返回值--',a);
+  a();
+  b();
+  console.log('这是一个返回值--',a());
+  console.log('这是一个返回值--',b());
 }
 
 render();
