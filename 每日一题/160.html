@@ -92,12 +92,12 @@
                 //     resolve('1s后返回正确的状态')
                 // }, 1000)
 
-                console.log('这个是顺序执行的');
+               // console.log('这个是顺序执行的');
                 resolve('1s后返回正确的状态')
             });
         }
         sucessFn().then(res => {
-            console.log('promise then 方法');
+           // console.log('promise then 方法');
             console.log(res)
         });
 

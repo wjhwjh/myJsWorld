@@ -61,24 +61,30 @@
         let nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
         console.log(removeDuplicates(nums));
 
+
+
+
         // 方法二，声明一个中间变量，一个for循环，时间复杂度也是O(n)
         // for 循环
         var removeDuplicates1 = function(nums) {
             if (nums == null || nums.length == 0) return;
             //
-            let temp = nums[0];
+            let temp;
             let arr = []; //创建一个新数组，存储去重之后的数
-            for (let i = 1; i < nums.length; i++) {
-                arr[0] = nums[0];
+            for (let i = 0; i < nums.length; i++) {
                 if (nums[i] != temp) {
                     temp = nums[i];
-                    arr.push(temp)
+                    arr.push(temp); // 这里应该使用push,因为新数组的长度和原数组长度不一致
                 }
             }
             return arr;
         };
         let nums1 = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
-        console.log('输出内容---', removeDuplicates1(nums1));
+        console.log('去重后输出内容---', removeDuplicates1(nums1));
+
+        for(let i=1; i<6; i++){
+            console.log('输出i的值---', i)
+        }
     </script>
 </body>
 
