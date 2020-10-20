@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数组排序后去重</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        /*
+         数组排序
+        */
+        /*
+          sort()排序， 回调函数返回a-b是升序， b-a 是降序
+        
+        */   
+        function sortfn(arr){
+            return arr.sort((a, b) =>b-a)
+        }
+        console.log(sortfn([3,2,1,4,6]))
+
+        /*
+         冒泡排序
+        */ 
+        const sortArray = function(arr){
+            for(let i= arr.length-1; i>=0; i--){
+                for(let j=0; j<i; j++){
+                    let temp = arr[j];
+                    if(arr[j]>arr[j+1]){
+                        arr[j]=arr[j+1];
+                       arr[j+1]=temp;     
+                    }
+                }
+            }
+
+            return arr
+        }
+       let a = [3,1,6,2,9,4,6];
+       console.log(sortArray(a))
+
+       //数组去重
+
+
+    </script>
+</body>
+
+</html>
