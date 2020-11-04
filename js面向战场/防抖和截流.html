@@ -57,7 +57,7 @@
        
        在指定的时间内，事件只触发一次。
 
-       这两种技术都用到了定时器。
+       这两种技术都用到了定时器。都用到时间和闭包
    </pre>
 
     <div class="debounce">0</div>
@@ -77,6 +77,7 @@
 
         // 防抖实现封装, 重新开始计算时间，也就是先清除定时器，然后继续执行
         // 对于闭包的使用
+        // debounceFn 防抖
         function debounceFn(fn, delay) {
             delay = delay || 0;
             let timer = null; // 因为闭包所以这个值是会被保留的
@@ -135,6 +136,28 @@
             }
         }
         waitTimeDiv.addEventListener('mouseenter', waitTimeFn(myEvent, 2000))
+
+    // 节流函数throttle
+    function throttle(fn, gapTime) {
+        if (gapTime == null || gapTime == undefined) {
+        gapTime = 1500
+        }
+        let _lastTime = null
+    
+        // 返回新的函数
+        return function() {
+            let _nowTime = +new Date()
+            if (_nowTime - _lastTime > gapTime || !_lastTime) {
+                fn.apply(this, arguments) //将this和参数传给原函数
+                _lastTime = _nowTime
+            } else {
+                console.log('请勿重复提交')
+            }
+        }
+    }
+
+
+
     </script>
 </body>
 
