@@ -42,6 +42,12 @@
         面向对象继承
     </h2>
     <pre>
+        1. 继承
+        2. 原型和原型链
+        3. Object.property()自定义对象属性, 实现双向数据绑定
+
+
+
         说一下面向对象如何继承的
          
         整体的思路，然后去填充细节， 有几种方法去实现
@@ -64,6 +70,13 @@
         Parent.prototype.hello = function() {
             console.log('输出姓名---', this.name)
         }
+        let obj1 = {
+            a: 1
+        }
+        console.log(obj1);
+        console.log(Object.prototype);
+
+        console.log(Parent.prototype);
 
         /*
          构造函数中的属性继承，使用的是函数的call方法，改变this指针
@@ -93,10 +106,30 @@
         });
         console.log('Child的原型--', Child.prototype)
         console.log("这是一个对象--", cObj)
-        console.log(cObj.hello());
-        // 继续写博客，注重知识的细节
+            //console.log(cObj.hello());
+            // 继续写博客，注重知识的细节
 
-        console.log()
+        console.log(Object.prototype);
+        let obj2 = {
+            name: ''
+        };
+
+        Object.defineProperty(obj2, 'user', {
+            configurable: true,
+            //writable: true,
+            enumerable: true,
+            //value: 3,
+            get: function() {
+                //console.log(this.value)
+                return this.name
+            },
+            set: function(value) {
+                console.log('设置的属性值－', value);
+                this.name = value
+            }
+        });
+
+        console.log(obj2)
     </script>
 </body>
 

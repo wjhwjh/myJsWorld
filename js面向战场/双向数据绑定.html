@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>双向数据绑定</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        #ipt {
+            height: 40px;
+            border: 1px solid #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>
+        面向对象继承
+    </h2>
+    <pre>
+        1. Object.property()自定义对象属性, 实现双向数据绑定
+    </pre>
+
+    <div>
+        <input type="text" value="" id="ipt" placeholder="请输入值">
+        <p id="text"></p>
+    </div>
+
+    <script>
+        function getId(id) {
+            return document.getElementById(id);
+        }
+        let obj = {};
+        Object.defineProperty(obj, 'iptValue', {
+            configurable: true,
+            get: function() {
+                return getId("ipt").value
+            },
+            set: function(value) {
+                getId("ipt").value = value
+                getId("text").innerHTML = value;
+            }
+        })
+        getId("ipt").addEventListener('keyup', function() {
+            //console.log(this.value);
+            getId("text").innerHTML = this.value;
+        })
+    </script>
+</body>
+
+</html>
