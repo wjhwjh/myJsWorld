@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>回文数</title>
+    <title>数组排序后去重</title>
 
     <style>
         body {
@@ -37,33 +37,41 @@
 </head>
 
 <body>
-    <h2>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</h2>
-    <pre>
-    </pre>
     <script>
-        var isPalindrome = function(x) {
-            // let left = 0;
-            // let right = x.length - 1;
-            x = x.toString();
-            let res = '';
-            for (let i = x.length - 1; i >= 0; i--) {
-                res += x[i];
-
-            }
-            if (x === res) {
-                return true
-            } else {
-                return false
-            }
-        };
-        console.log(isPalindrome(-125651));
-        isPalindrome(-125651);
-        // isPalindrome(12122);
-
-        var isPalindrome1 = function(x) {
-            let left = 0;
-            let right = x.length - 1;
+        /*
+         数组排序
+        */
+        /*
+          sort()排序， 回调函数返回a-b是升序， b-a 是降序
+        
+        */   
+        function sortfn(arr){
+            return arr.sort((a, b) =>b-a)
         }
+        console.log(sortfn([3,2,1,4,6]))
+
+        /*
+         冒泡排序
+        */ 
+        const sortArray = function(arr){
+            for(let i= arr.length-1; i>=0; i--){
+                for(let j=0; j<i; j++){
+                    let temp = arr[j];
+                    if(arr[j]>arr[j+1]){
+                        arr[j]=arr[j+1];
+                       arr[j+1]=temp;     
+                    }
+                }
+            }
+
+            return arr
+        }
+       let a = [3,1,6,2,9,4,6];
+       console.log(sortArray(a))
+
+       //数组去重
+
+
     </script>
 </body>
 
