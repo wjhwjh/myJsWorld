@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        .box {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            /* width: 400px;
+            margin: auto;
+            border: 1px solid #ccc; */
+        }
+        
+        .boxList {}
+        
+        .boxList li {
+            padding: 0 10px 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .boxList li p {
+            font-size: 13px;
+        }
+        
+        .btnBox {
+            text-align: right;
+        }
+        
+        .btnBox button {
+            background: #ddd;
+            padding: 5px 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .scoreText {}
+        
+        #score {
+            margin: 0 10px;
+            height: 28px;
+            padding-left: 5px;
+            font-size: 14px;
+            line-height: 28px;
+            border: 1px solid #ccc;
+        }
+        
+        .tips {
+            font-size: 12px;
+        }
+        
+        .tips.right {
+            color: turquoise;
+        }
+        
+        .tips.error {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box">
+        <label for="score" class="scoreText">成绩查询：</label>
+        <input type="text" id="score" placeholder="请输入分数">
+        <div class="tips">
+            请输入成绩分数
+        </div>
+    </div>
+    <script>
+        // 修改DOM属性，设置DOM样式属性
+        // 对于输入的内容的判断
+        // 输入框获取焦点和失去焦点
+
+        function $GetID(id) {
+            return id && typeof id === 'string' ? document.getElementById(id) : null
+        }
+        let elTip = document.getElementsByClassName('tips')[0];
+
+        $GetID('score').onblur = function() {
+            // parseFloat()和parseInt()作用类似，parseInt()返回的是的整数，parseFloat()返回的是的小数
+            // 当没有返回值时是NaN
+            let value = parseFloat(this.value);
+
+            //判断value的值 
+            if (isNaN(value)) { //如果输入的内容不能转化为数字
+                this.style.borderColor = '#f00';
+                elTip.innerHTML = '输入的内容不正确';
+                elTip.className = 'tips error';
+            } else if (value >= 0 && value <= 100) { // 输入正确分数
+                this.style.borderColor = '#ccc';
+                elTip.innerHTML = '输入的内容正确';
+                elTip.className = 'tips right';
+            } else { // 输入的分数不在范围内
+                this.style.borderColor = '#f00';
+                elTip.innerHTML = '输入0~100之间的数字';
+                elTip.className = 'tips error';
+            }
+        }
+
+
+        $GetID('score').onfocus = function() {
+            console.log('获得焦点')
+            this.value = '';
+            this.style.borderColor = '#ccc';
+            elTip.innerHTML = '请输入成绩分数';
+            elTip.className = 'tips';
+        }
+    </script>
+</body>
+
+</html>

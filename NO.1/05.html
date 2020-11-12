@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>单复选框</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        .box {
+            padding: 10px 0;
+            width: 400px;
+            margin: auto;
+            border: 1px solid #ccc;
+        }
+        
+        .boxList {}
+        
+        .boxList li {
+            padding: 0 10px 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .boxList li p {
+            font-size: 13px;
+        }
+        
+        .btnBox {
+            text-align: right;
+        }
+        
+        .btnBox button {
+            background: #ddd;
+            padding: 5px 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul class="boxList">
+            <li>
+                <p>演员</p>
+                <input type="checkbox"></input>
+            </li>
+            <li>
+                <p>演员</p>
+                <input type="checkbox"></input>
+            </li>
+            <li>
+                <p>演员</p>
+                <input type="checkbox"></input>
+            </li>
+            <li>
+                <p>演员</p>
+                <input type="checkbox"></input>
+            </li>
+            <li>
+                <p>演员</p>
+                <input type="checkbox"></input>
+            </li>
+        </ul>
+        <div class="btnBox">
+            <button class="btn">全选</button>
+            <button class="btn">取消全选</button>
+            <button class="btn">反选</button>
+        </div>
+    </div>
+    <script>
+        // id获取元素
+        function getID(id) {
+            return id && typeof id === 'string' ? document.getElementById(id) : null
+        }
+        // 获取DOM元素
+        let btn = document.getElementsByClassName('btn');
+        let iptCheckBox = getID('box').getElementsByTagName('input');
+        let len = iptCheckBox.length;
+        // console.log(iptCheckBox, len)
+
+        // 全选
+        btn[0].onclick = function() {
+            for (let i = 0; i < len; i++) {
+                iptCheckBox[i].checked = true
+            }
+        }
+
+        // 全不选
+        btn[1].onclick = function() {
+            for (let i = 0; i < len; i++) {
+                iptCheckBox[i].checked = false
+            }
+        }
+
+        // 反选
+        btn[2].onclick = function() {
+            // console.log('反选')
+            for (let i = 0; i < len; i++) {
+                // console.log(iptCheckBox[i].checked)
+                let flag = iptCheckBox[i].checked;
+                iptCheckBox[i].checked = !flag;
+            }
+        }
+    </script>
+</body>
+
+</html>

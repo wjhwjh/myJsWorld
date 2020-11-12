@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>生成随机数</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        .box {
+            padding: 10px 0;
+            /* display: flex;
+            align-items: center; */
+            /* width: 400px;
+            margin: auto;
+            border: 1px solid #ccc; */
+        }
+        
+        #code {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            margin-bottom: 10px;
+            vertical-align: top;
+            text-align: center;
+            line-height: 40px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #f00;
+            background: #ecec;
+        }
+        
+        #getCode {
+            margin-left: 5px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            height: 40px;
+            line-height: 40px;
+        }
+        
+        #iptCode {
+            height: 30px;
+            vertical-align: top;
+            padding-left: 5px;
+            line-height: 30px;
+            border: 1px solid #ddd;
+        }
+        
+        #verificationBtn {
+            padding: 0 20px;
+            height: 30px;
+            line-height: 30px;
+            color: #333;
+            font-size: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div id="code">2345</div><button id="getCode">点击重新获取</button>
+        <div>
+            <input type="text" id="iptCode" placeholder="请输入验证码"> <button id="verificationBtn">验证</button>
+        </div>
+    </div>
+    <script>
+        //  随机数生成函数, 也就是随机数
+        // 输入框中的输入值和随机数对进行对比
+        // 如果对比相同说明验证码正确
+
+
+        let codeDIV = $id('code');
+        let iptDIV = $id('iptCode');
+        let code; // 定义的是一个全局变量，存放随机数
+        // 获取DOM的函数
+        function $id(id) {
+            return !!id && typeof id === 'string' ? document.getElementById(id) : null
+        }
+        // 随机生成函数
+        function random(m, n) {
+            return Math.floor(Math.random() * (n - m + 1) + m)
+        }
+
+        // 生成随机数函数
+        function creatCode() {
+            code = '';
+            let len = 4;
+            let randomArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'U', 'W', 'X', 'Y', 'Z'];
+
+            // 如何思考这里的逻辑
+            // 随机从数组中取元素，然后拼接到code变量中。 
+            // 根据随机生成的下标，进而得到数组中随机位置的元素
+            for (let i = 0; i < len; i++) {
+                let r = random(0, 35);
+                code += randomArray[r];
+            }
+            return code;
+        }
+
+        // 默认初始化
+        codeDIV.innerHTML = creatCode();
+
+        // 点击生成随机数
+        $id('getCode').onclick = function() {
+            codeDIV.innerHTML = creatCode();
+            iptDIV.value = '';
+        }
+
+        // 验证随机数
+        // toLowerCase()  toUpperCase() 字符串大小写的转化
+        $id('verificationBtn').onclick = function() {
+            let value = $id('iptCode').value.toUpperCase();
+            //let code = $id('code').innerHTML;
+            if (value === code) {
+                iptDIV.value = '';
+                window.location.href = 'https://www.baidu.com/'
+            } else {
+                alert('请输入正确的验证码');
+                $id('iptCode').value = '';
+                codeDIV.innerHTML = creatCode();
+            }
+        }
+    </script>
+</body>
+
+</html>

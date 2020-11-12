@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>封装tab切换</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        a{
+            text-decoration: none;
+        }
+        input:focus{
+            outline: 0;
+        }
+        .tab-wrapper{
+            margin: auto;
+            width: 800px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+        .nav-wrapper{
+            position: relative;
+            height: 40px;
+            background: #fafafa;
+        }
+        .nav{}
+        .add{
+            display: inline-block;
+            position: absolute;
+            right: 3px;
+            top: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 20px;
+            color: #333;
+            font-size: 18px;
+            background: #fff;
+            cursor: pointer;
+        }
+        .nav li{
+            position: relative;
+            display: inline-block;
+            float: left;
+            padding: 0 25px;
+            height: 40px;
+            line-height: 40px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            overflow: hidden;
+        }
+      
+        .nav li.active{
+            background: #fff;
+            border-bottom: 0;
+        }
+        .nav li .tabDelete{
+            display: inline-block;
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 48%;
+            font-size: 20px;
+            line-height: 19px;
+            color: #000;
+            font-weight: 200;
+            text-indent: 3px;
+            background: #eee;
+        }
+        .content-wrapper{
+            width: 100%;
+            height: 460px;
+        }
+        .content-wrapper > div{
+            width: 100%;
+            height: 460px;
+            padding: 20px;
+            display: none;
+        }
+        .content-wrapper > div.active{
+            display: block;
+        }
+        .content-wrapper > div input{
+            width: 80%;
+            height: 200px;
+            margin: auto;
+            border: 1px solid #ddd;
+        }
+        /*css实现双击去掉默认选中文字*/
+        .nav li, .content-wrapper{
+            -moz-user-select:none;/*火狐*/
+            -webkit-user-select:none;/*webkit浏览器*/
+            -ms-user-select:none;/*IE10*/
+            -khtml-user-select:none;/*早期浏览器*/
+            user-select:none;
+        }
+        .nav li input{
+            border: 1px solid #ccc;
+            height: 30px; 
+            width: 100px;    
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="tab-wrapper" id="tabWrapper">
+    <div class="nav-wrapper">
+        <ul class="nav">
+            <li class="active"><span>JS</span> <a class="tabDelete" href="javascript:void(0)">-</a></li>
+            <li><span>css</span> <a class="tabDelete" href="javascript:void(0)">-</a></li>
+            <li><span>HTML</span><a class="tabDelete" href="javascript:void(0)">-</a></li>
+        </ul>
+        <span class="add">+</span>
+    </div>
+    <div class="content-wrapper">
+        <div class="active">1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+</div>
+
+<script src="./tab.js"></script>
+<script>
+</script>
+</body>
+</html>

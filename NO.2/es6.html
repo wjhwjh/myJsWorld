@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <pre>
+    es6中变量最大的特点就是作用域死区，
+    变量会和当前的作用域绑定
+</pre>
+
+    <script>
+        // let a = '这是一个字符串';
+        // if (true) {
+        //     console.log(a);
+        //     let a = '这个一个局部作用域变量'
+        // }
+        var a = '这是一个字符串';
+        if (true) {
+            console.log(a);
+            var a = '这个一个局部作用域变量'
+            console.log(a);
+        }
+    </script>
+</body>
+
+</html>

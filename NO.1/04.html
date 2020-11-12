@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        .wrapper {
+            width: 600px;
+            padding-top: 400px;
+            background: url('./1.jpg') no-repeat center top;
+        }
+        
+        .tabList {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .tabList li {
+            cursor: pointer;
+            width: 100px;
+            border: 1px solid #fff;
+        }
+        
+        .tabList li img {
+            width: 100%;
+            display: block;
+        }
+        
+        .tabList li.act {
+            border: 1px solid #f00;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>使用函数封装功能</h2>
+    <pre>
+       实现一个鼠标滑过小图大图跟着切换的功能
+       思路：
+       1. 大图设置为背景图，小图是li元素
+       2. 大图也可以是DOM中img设置的src在改变
+       3. 鼠标滑过li元素，注册一个onmouseover事件
+       
+    </pre>
+    <!-- 以下是DOM 
+     在为DOM设置css属性优先级时应该考虑到js的使用
+    -->
+    <div class="wrapper" id="wrapper">
+        <ul class="tabList">
+            <li class="act">
+                <img src="./1.jpg" alt="" class="tabItem">
+            </li>
+            <li>
+                <img src="./2.jpg" alt="" class="tabItem">
+            </li>
+            <li>
+                <img src="./3.jpg" alt="" class="tabItem">
+            </li>
+            <li>
+                <img src="./4.jpg" alt="" class="tabItem">
+            </li>
+            <li>
+                <img src="./5.jpg" alt="" class="tabItem">
+            </li>
+        </ul>
+    </div>
+
+
+    <script>
+        // 获取DOM元素
+        let $wrapper = document.getElementById('wrapper');
+        let $tabItem = document.getElementsByClassName('tabItem');
+        console.log($tabItem);
+        //封装DOM对象获取
+
+        // 遍历每一个li注册事件
+        for (let i = 0; i < $tabItem.length; i++) {
+            $tabItem[i].onmouseover = function() {
+                console.log(this.parentNode);
+                // 鼠标滑过要执行的代码
+                // getAttribute()有两个参数，不设置第二个参数会报错
+                this.parentNode.setAttribute('class', 'act');
+                let smallImgSrc = this.getAttribute('src');
+                $wrapper.style.background = `url(${smallImgSrc}) no-repeat center top`;
+            }
+        }
+    </script>
+</body>
+
+</html>

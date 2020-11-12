@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件格式验证</title>
+
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        .box {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            /* width: 400px;
+            margin: auto;
+            border: 1px solid #ccc; */
+        }
+        
+        #file {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        .file-wrapper {
+            position: relative;
+            width: 200px;
+            height: 20px;
+            background: #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box">
+        <label for="file">选择上传文件： </label>
+        <div class="file-wrapper" id='boxfile'>上传文件 <input type="file" id="file" value="这是文件"></div>
+        <!-- <input type="file" id="file" value="这是文件"> -->
+    </div>
+    <script>
+        // .jpg .jpeg .doc .xlsx .txt
+        // 获取DOM元素input
+        let file = document.getElementById('file');
+        // 当input框改变时要触发的事件是 onchange
+        file.onchange = function() {
+            console.log(this.value)
+                // 获取打开文件的路径
+            let path = this.value; // C:\fakepath\1.jpg
+            // 使用lastIndexOf()从后边开始检索，很秒。正向思维的就是也是找“.后缀”这个
+            let loc = path.lastIndexOf('.');
+            let str = path.substr(loc);
+            // 使用正则表达式进行匹配
+            if (/(.jpg)|(.jpeg)|(.xlsx)|(.txt)/.test(str)) {
+                console.log('选择的文件正确')
+                alert('上传的文件正确')
+            } else {
+                console.log('选择的文件不正确')
+                alert('上传的文件不正确')
+            }
+        }
+
+        /*
+        整体
+         实现的功能
+         上传文件，判断文件的格式是否正确并给出反馈。
+         主要使用的是input的type=file的属性
+         input的onchange事件
+
+         1. input type=file时，dom中包括上传按钮和上传的文件名，这个是自带的
+         2. lastIndexOf()的使用
+         3. 正则的使用
+         
+         */
+        // boxfile.onchange = function() {
+        //     console.log(value)
+        // }
+    </script>
+</body>
+
+</html>

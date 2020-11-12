@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>九宫格</title>
+
+    <style>
+        body {
+            padding: 10px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        
+        h2 {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        button{
+            outline: none;
+            border: 0;
+        }
+        pre {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        #box{
+            position: relative;
+        }
+        #box .item{
+            padding: 20px;
+            display: inline-block;
+        }
+        #box .item-content{
+            padding-bottom: 15px;
+            width: 215px;
+            /* margin: 30px; */
+            box-shadow: 0 0 25px rgba(0, 0, 0 , 0.1);
+        }
+        #box .item-content h1{
+            padding: 5px 15px;
+            font-size: 16px;
+            color: #333;
+
+        }
+        #box .item-content .text{
+            padding: 5px 15px;
+            font-size: 14px;
+            color: #888;
+        }
+        .btn-wrapper{
+            margin-bottom: 20px;
+        }
+        .btn-wrapper button{
+            padding: 5px 15px;
+            margin-right: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="btn-wrapper" id="btn-wrapper">
+        <button>3列</button>
+        <button>4列</button>
+        <button>5列</button>
+        <button>6列</button>
+        <button>7列</button>
+    </div> 
+    <div class="box" id='box'>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>1这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>2这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>3这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>4这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>5这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>6这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>7这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>8这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>9这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>10这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>11这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>12这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        <div class = 'item'>
+            <div class="item-content">
+                <img src="./pic.jpg" alt="">
+                <h1>13这里是标题</h1>
+                <p class="text">这里是描述，描述就是说明这里要做的事情。</p>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script>
+        function $getId(id){
+            return id && typeof id ==="string" ? document.getElementById(id):null 
+        }
+        // window.onload = function(){
+            // 获取DOM
+            let btnDiv = $getId('btn-wrapper').getElementsByTagName('button');
+            let itemDiv = document.getElementsByClassName('item');
+            let len = itemDiv.length;
+          
+        
+            // 添加事件
+            btnDiv[0].onclick = function(){
+                gridFn(3)
+            }
+            btnDiv[1].onclick = function(){
+                gridFn(4)
+            }
+            btnDiv[2].onclick = function(){
+                gridFn(5)
+            }
+            btnDiv[3].onclick = function(){
+                gridFn(6)
+            }
+            btnDiv[4].onclick = function(){
+                gridFn(7)
+            }
+
+            function gridFn(num){
+                // 获取div的宽和高,当DOM没有加载完，获取高度是不完全
+                // 第一使用window.onload或者放到函数里，这样在使用的时候 获取DOM元素的属性
+                let itemWidth = itemDiv[0].offsetWidth;
+                let itemHeigth = itemDiv[0].offsetHeight;
+                for (let i =0; i<len; i++){
+                    let row = Math.floor(i/num);
+                    let col = i%num;
+                    itemDiv[i].style.position="absolute";
+                    itemDiv[i].style.top = row*itemHeigth+'px';
+                    itemDiv[i].style.left = col*itemWidth + 'px';
+                }
+            }
+        //}
+    </script>
+</body>
+
+</html>
