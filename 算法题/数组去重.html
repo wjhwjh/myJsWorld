@@ -42,19 +42,19 @@
 */
 
 var removeDuplicates = function(arr){
-    if(arr&&arr.length)return false;
+    if(!arr&&!arr.length)return false;
     let res=[];
 
     for(let i=0; i<arr.length; i++){
-        if(res.){
+        if(res.indexOf(arr[i])==-1){
             res.push(arr[i])
         }
     } 
-
-
+    return res
 }
 
 
+console.log(removeDuplicates([4,5,2,1,4,3,2,6,5]));
 
 </script>
 </body>
