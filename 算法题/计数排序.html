@@ -51,7 +51,8 @@
             // 1.计算出差值d,最小值小于0,加上本身add  
             let d = max - min,
                 add = min < 0 ? -min : 0;
-            //2.创建统计数组并统计对应元素个数      
+            //2.创建统计数组并统计对应元素个数
+            // 差值作为下标，个数作为其对应的值  
             let countArray = new Array(d + 1 + add).fill(0);
             console.log(countArray, countArray.length, min, add)
             for (let i = 0; i < len; i++) {
